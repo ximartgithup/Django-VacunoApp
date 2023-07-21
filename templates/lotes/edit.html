@@ -1,0 +1,64 @@
+{% extends 'home.html' %}
+
+{% block contenido %}
+   <h3>Editar lote</h3>
+    {% if msg %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Ok!</strong> {{msg}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
+    {% if lotes %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" value="{{lotes.nombre}}" required>
+            <input type="hidden" name="idlote" value="{{lotes.id}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Descripción:</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{lotes.descripcion}}"  required>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Fecha:</label>
+            <input type="date" class="form-control" name="fecha" id="fecha" value="{{lotes.fecha}}"  required>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Hacienda:</label>
+            <select class="form-select" aria-label="Default select example" name="hacienda" id="hacienda">
+                <option selected>--Seleccione la hacienda--</option>
+                 {% for row in haciendas %}
+
+                  {% if lotes.hacienda.id == row.id %}
+                    <option value="{{row.id}}" selected>{{row.id}} - {{row.nombre}} </option>
+                  {% else %}  
+                    <option value="{{row.id}}">{{row.id}} - {{row.nombre}} </option>
+                  {% endif %}  
+                 
+                  {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Propietario:</label>
+            <select class="form-select" aria-label="Default select example" name="propietario" id="propietario">
+                <option selected>--Seleccione el propietario--</option>
+                {% for row in propietarios %}
+                 {% if lotes.propietario.id == row.id %}
+                    <option value="{{row.id}}" selected>{{row.id}} -{{row.apellidos}}  {{row.nombres}} </option>
+                  {% else %}   
+                  <option value="{{row.id}}">{{row.id}} -{{row.apellidos}}  {{row.nombres}} </option>
+                  {% endif %}
+                {% endfor %}
+                
+            </select>
+        </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          
+    </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'home.html' %}
+
+{% block contenido %}
+    {% if msg %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Ok!</strong> {{msg}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Descripción:</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Fecha:</label>
+            <input type="date" class="form-control" name="fecha" id="fecha" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Hacienda:</label>
+            <select class="form-select" aria-label="Default select example" name="hacienda" id="hacienda">
+                <option selected>--Seleccione la hacienda--</option>
+                 {% for row in haciendas %}
+                 <option value="{{row.id}}">{{row.id}} - {{row.nombre}} </option>
+                 {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Propietario:</label>
+            <select class="form-select" aria-label="Default select example" name="propietario" id="propietario">
+                <option selected>--Seleccione el propietario--</option>
+                {% for row in propietarios %}
+                <option value="{{row.id}}">{{row.id}} -{{row.apellidos}}  {{row.nombres}} </option>
+                {% endfor %}
+                
+            </select>
+        </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          
+    </form>
+{% endblock %}

@@ -1,0 +1,25 @@
+<h1>Litado de Lotes en pdf</h1>
+<table border="1">
+    <thead>
+       <tr>
+           <th>ID</th>
+           <th>NOMBRE</th>
+           <th>DESCRIPCIÓN</th>
+           <th>FECHA</th>
+       </tr>
+    </thead>
+    <tbody>
+      
+       {% for row  in lotes %}
+        <tr>
+            <td> {{row.id}} </td>
+            <td> {{row.nombre}}</td>
+            <td> {{row.descripcion}} </td>
+            <td> {{row.fecha}} </td>
+        </tr>   
+       {% endfor %}
+     
+    </tbody>
+   </table>
+   <br>
+   Impreso por: {{user.username}}, Hora:

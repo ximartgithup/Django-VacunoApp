@@ -1,0 +1,63 @@
+{% extends 'home.html' %}
+{% block contenido %}
+<h3>Listado de Lotes</h3>
+ <a href="/nuevolote/">
+    <button type="button" class="btn btn-success btn-lg" >
+    <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Lote  
+    </button>
+</a>
+{% if msg %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Ok!</strong> {{msg}}.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+
+<table class="table table-hover">
+ <thead>
+    <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>DESCRIPCIÓN</th>
+        <th>FECHA</th>
+        <th>ACCIÓN</th>
+    </tr>
+ </thead>
+ <tbody>
+   
+    {% for row  in lotes %}
+    
+     <tr>
+         <td> {{row.id}} </td>
+         <td> {{row.nombre}}</td>
+         <td> {{row.descripcion}} </td>
+         <td> {{row.fecha}} </td>
+         <td>
+        <a href="/editlote/{{row.id}}" title="Editar">     
+          <button type="button" class="btn btn-info" >
+            <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:24px"></i>
+           </button>
+        </a>
+            <a href="/deletlote/{{row.id}}" title="Eliminar" onclick="return confirm('quieres eliminar?')" >
+                <button type="button" class="btn btn-danger"> 
+                <i class="fa fa-trash-o" aria-hidden="true" style="font-size:24px"></i>
+                </button>    
+           </a>
+         </td>
+     </tr>   
+    {% endfor %}
+
+    
+ </tbody>
+ <tfoot>
+ <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>DESCRIPCIÓN</th>
+        <th>FECHA</th>
+        <th>ACCIÓN</th>
+    </tr>
+ </tfoot>
+</table>
+
+{% endblock %}
